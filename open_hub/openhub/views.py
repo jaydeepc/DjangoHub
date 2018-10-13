@@ -1,7 +1,7 @@
 import requests
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import RepoDetails
+from .models import RepoDetails, Contributors
 
 
 def index(request):
@@ -16,6 +16,7 @@ def index(request):
 def projects(request):
 
     projects = RepoDetails.objects.all()
+
     context = {
         'projects': projects
     }

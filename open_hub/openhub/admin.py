@@ -1,5 +1,14 @@
 from django.contrib import admin
 
-from .models import RepoDetails
+from .models import RepoDetails, Contributors
 
-admin.site.register(RepoDetails)
+
+class RepoAdmin(admin.ModelAdmin):
+    pass
+
+
+class ContributorAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(RepoDetails, RepoAdmin)
+admin.site.register(Contributors, ContributorAdmin)

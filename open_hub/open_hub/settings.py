@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'open_hub.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'open_hub',
+        'NAME': 'openhub',
         'USER': 'root',
         'HOST': '',
         'PORT': ''

@@ -92,7 +92,7 @@ demo = {
                   fill: true,
                   backgroundColor: gradientFill,
                   borderWidth: 2,
-                  data: [542, 480, 430, 550, 530, 453]
+                  data: [566, 480, 430, 550, 530, 453]
               }]
           },
           options: gradientChartOptionsConfiguration
@@ -222,7 +222,7 @@ demo = {
                   fill: true,
                   backgroundColor: gradientFill,
                   borderWidth: 2,
-                  data: [542, 480, 430, 550, 530, 453]
+                  data: [657, 480, 430, 550, 530, 453]
               }]
           },
           options: {
