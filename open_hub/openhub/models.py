@@ -3,13 +3,13 @@ from django.db import models
 
 class Contributors(models.Model):
 
-    cid = models.IntegerField(primary_key=True)
+    cid = models.AutoField(primary_key=True)
     user_firstname = models.CharField(max_length=25)
     user_lastname = models.CharField(max_length=25)
     git_username = models.CharField(max_length=255)
     country = models.CharField(max_length=25)
     office = models.CharField(max_length=25)
-    user_photo = models.ImageField(upload_to='profile_image', blank=True)
+    user_photo = models.ImageField(upload_to='profile_image', blank=True, default="profile_image/missing.png")
 
     class Meta:
         managed = True

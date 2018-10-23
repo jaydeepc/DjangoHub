@@ -1,0 +1,21 @@
+db:
+  container_name: db_server
+  hostname: db_server
+  image: mysql:5.7.16
+  ports:
+    - 3306:3306
+  expose:
+    - 3306
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    MYSQL_DATABASE: 'openhub'
+
+myapp:
+  build: .
+  links:
+    - 'db:db_server'
+  ports:
+    - "8000:8000"
+  volumes:
+      - ..:/openhub
+  command: bash -c "python open_hub/manage.py makemigrations && python open_hub/manage.py migrate  && python open_hub/manage.py runserver"

@@ -37,13 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'djangosecure',
-    'sslserver',
+    'django.contrib.staticfiles'
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,9 +76,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'openhub',
-        'USER': 'root',
-        'HOST': '',
-        'PORT': ''
+        'USER': '',
+        'HOST': 'db_server',
+        'PORT': '3306'
     }
 }
 
