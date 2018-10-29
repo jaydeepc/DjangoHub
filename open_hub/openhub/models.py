@@ -9,7 +9,7 @@ class Contributors(models.Model):
     git_username = models.CharField(max_length=255)
     country = models.CharField(max_length=25)
     office = models.CharField(max_length=25)
-    user_photo = models.ImageField(upload_to='profile_image', blank=True, default="profile_image/missing.png")
+    user_photo = models.ImageField(upload_to='profile_image', blank=True, default="profile_image/default.png")
 
     class Meta:
         managed = True
@@ -18,12 +18,12 @@ class Contributors(models.Model):
 
 class RepoDetails(models.Model):
 
-    project_id = models.IntegerField(primary_key=True)
+    project_id = models.AutoField(primary_key=True)
     project_name = models.CharField(max_length=25)
     vcs_url = models.CharField(max_length=500)
     project_name = models.CharField(max_length=100)
     project_description = models.TextField()
-    project_techstack = models.CharField(max_length=25)
+    project_techstack = models.CharField(max_length=500)
     contributor = models.ForeignKey(Contributors, on_delete=models.CASCADE)
 
     class Meta:

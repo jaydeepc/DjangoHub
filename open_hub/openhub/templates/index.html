@@ -8,12 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>ThoughtWorks | Open Source Projects</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <script src="{% static 'js/core/jquery.min.js' %}"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
     <link href="{% static 'css/style.css' %}" rel="stylesheet" />
     <link href="{% static 'css/now-ui-dashboard.css' %}" rel="stylesheet" />
     <link href="{% static 'demo/demo.css' %}" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 </head>
 
 <body class="">
@@ -51,33 +53,24 @@
                     <div class="col-lg-4">
                         <div class="card card-chart">
                             <div class="card-header">
-                                <h5 class="card-category">Most Popular</h5>
-                                <h4 class="card-title">Most popular projects</h4>
+                                <h5 class="card-category"></h5>
+                                <h4 class="card-title">Contributors | All Offices</h4>
                             </div>
                             <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id=""></canvas>
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="stats">
-
-                                </div>
+                                    <canvas id="myChart" width="200" height="200"></canvas>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="card card-chart">
                             <div class="card-header">
-                                <h5 class="card-category">2018 Report</h5>
-                                <h4 class="card-title">All Projects</h4>
+                                <h5 class="card-category">Techstack Distribution</h5>
+                                <h4 class="card-title">Techstacks Diversity</h4>
                             </div>
                             <div class="card-body">
                                 <div class="chart-area">
                                     <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
                                 </div>
-                            </div>
-                            <div class="card-footer">
                             </div>
                         </div>
                     </div>
@@ -91,8 +84,6 @@
                                 <div class="chart-area">
                                     <canvas id="barChartSimpleGradientsNumbers"></canvas>
                                 </div>
-                            </div>
-                            <div class="card-footer">
                             </div>
                         </div>
                     </div>
@@ -151,5 +142,57 @@
         demo.initDashboardPageCharts();
     });
 </script>
+<script>
+    var endpoint = "api/office-dist-data/";
+    var labels = [];
+    var data = [];
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: function(response){
 
+            $.each(response, function(index, value){
+                labels.push(value.office);
+                data.push(value.count);
+            });
+
+            var ctx = document.getElementById("myChart");
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: ' - Contributors',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                }
+            });
+        },
+        error: function(error_data){
+            console.log("Error")
+            console.log(error_data)
+        },
+
+    })
+</script>
+<script>
+
+</script>
 </html>

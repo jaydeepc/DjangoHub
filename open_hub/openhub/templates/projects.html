@@ -77,63 +77,30 @@
       <!-- End Navbar -->
       <div class="panel-header panel-header-sm">
       </div>
-      <div class="content">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">All Projects</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <th>
-                        Project Name
-                      </th>
-                      <th>
-                        Owner
-                      </th>
-                      <th>
-                        Country
-                      </th>
-                      <th class="text-right">
-                        Office
-                      </th>
-                      <th class="text-right">
-                        Techstack
-                      </th>
-                    </thead>
-                    <tbody>
-                    {% for project in projects %}
-                      <tr>
-                        <td>
-                          {{ project.project_name }}
-                        </td>
-                        <td>
-                          {{ project.contributor.user_firstname }}
-                        </td>
-                        <td>
-                          {{ project.contributor.country }}
-                        </td>
-                        <td class="text-right">
-                          {{ project.contributor.office }}
-                        </td>
-                        <td class="text-right">
-                          {{ project.project_techstack }}
-                        </td>
-                      </tr>
-                    {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+      <div class="content" style="margin: auto;">
+        {% for project in projects %}
+            <div style="float: left;">
+              <aside class="profile-card">
+                  <header>
+                    <a target="_blank" href="#">
+                      <img src="{{ project.contributor.user_photo.url }}" class="hoverZoomLink">
+                    </a>
+                    <h1>{{ project.project_name }}</h1>
+                    <h2>{{ project.project_techstack }}</h2>
+                  </header>
+                  <div class="profile-bio">
+                    <p>
+                      {{ project.project_description }}
+                    </p>
+                  </div>
+              </aside>
             </div>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
+    </div>
+
+
   <!--   Core JS Files   -->
 <script src="{% static 'js/core/jquery.min.js' %}"></script>
 <script src="{% static 'js/core/popper.min.js' %}"></script>

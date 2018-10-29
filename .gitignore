@@ -2,3 +2,4 @@
 django_venv/
 open_hub/openhub/migrations
 open_hub/openhub/media
+open_hub/.DS_Store

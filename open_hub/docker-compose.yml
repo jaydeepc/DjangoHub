@@ -17,5 +17,5 @@ myapp:
   ports:
     - "8000:8000"
   volumes:
-      - ..:/openhub
-  command: bash -c "python open_hub/manage.py makemigrations && python open_hub/manage.py migrate  && python open_hub/manage.py runserver"
+      - .:/openhub
+  command: bash -c "python manage.py makemigrations && python manage.py migrate && python etl.py  && python manage.py runserver 0.0.0.0:8000"
