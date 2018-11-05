@@ -7,10 +7,15 @@ mydb = MySQLdb.connect(host='db_server',
     db='openhub')
 cursor = mydb.cursor()
 
+cursor.execute("SET FOREIGN_KEY_CHECKS = 0")
+cursor.execute("Truncate table openhub_repos")
+cursor.execute("Truncate table openhub_contributors")
+cursor.execute("SET FOREIGN_KEY_CHECKS = 1")
 
 def populate_contributor():
     with open('data.csv', newline='') as datafile:
         reader = csv.DictReader(datafile)
+
         for row in reader:
             git_username = row['Github username (If the project is on Git)']
             list = [row['First name'], row['Last name'], git_username, "India", row['Your home office'],"profile_image/default.png"]
@@ -23,6 +28,7 @@ def populate_contributor():
 def populate_repos():
     with open('data.csv', newline='') as datafile:
         reader = csv.DictReader(datafile)
+
         for row in reader:
             git_username = row['Github username (If the project is on Git)']
             list_2 = [row["Open Source project name"], row["Project description"], row["VCS Url"], row["Tech-stack used in the project"], git_username]

@@ -5,6 +5,8 @@ from .models import RepoDetails, Contributors
 import json
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.decorators import api_view
+import requests
 
 
 def index(request):
@@ -26,17 +28,12 @@ def projects(request):
     return render(request, 'projects.html', context)
 
 
-def get_count_by_office(request):
-    if request.method == "GET":
-        try:
-            contributors = Contributors.objects.all().values('office').annotate(total=Count('office'))
-            response = []
-            for entry in contributors:
-                response.append({'office': entry['office'], 'count': entry['total']})
-        except:
-            response = json.dumps([{'Error': 'No such office'}])
-
-    return JsonResponse(response, safe=False)
+@api_view(['GET'])
+def get_techstack_count(request):
+    column_name = 'project_techstack'
+    projects = RepoDetails.objects.values(column_name).order_by(column_name).annotate(total=Count(column_name)).exclude(project_techstack__exact='NA')
+    response = projects
+    return Response(response)
 
 
 class OfficeDistribution(APIView):
