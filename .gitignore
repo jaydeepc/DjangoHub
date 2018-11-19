@@ -83,8 +83,6 @@ target/
 *.pot
 *.pyc
 __pycache__/
-openhub/__pycache__/
-global/__pycache__/
 local_settings.py
 
 .env
